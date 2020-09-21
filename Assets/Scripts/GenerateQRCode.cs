@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using ZXing;
-using ZXing.Common;
 using TMPro;
 using System;
+using ZXing;
+using ZXing.Common;
 
 public class GenerateQRCode : MonoBehaviour
 {
@@ -33,11 +33,6 @@ public class GenerateQRCode : MonoBehaviour
         cRawImage = GetComponent<RawImage>();
         width = Convert.ToInt32(cRawImage.rectTransform.rect.width);
         height = Convert.ToInt32(cRawImage.rectTransform.rect.height);
-    }
-
-    void LateUpdate()
-    {
-
     }
 
     public void GenerateQRCodeButton()
