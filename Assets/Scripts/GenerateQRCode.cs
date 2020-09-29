@@ -9,27 +9,23 @@ using ZXing.Common;
 
 public class GenerateQRCode : MonoBehaviour
 {
+    //Converts Json into a QR Code
+
     [SerializeField] private BarcodeFormat format = BarcodeFormat.QR_CODE;
-    private string data = "";
     private int width;
     private int height;
     private RawImage cRawImage;
 
     public TMP_InputField teamNumberInputField;
     public TMP_InputField nameInputField;
-
-    // private void Start()
-    // {
-    //     cRawImage = GetComponent<RawImage>();
-    //     // Generate the texture
-    //     Texture2D tex = GenerateBarcode(data, format, width, height);
-    //     // Setup the RawImage
-    //     cRawImage.texture = tex;
-    //     cRawImage.rectTransform.sizeDelta = new Vector2(tex.width, tex.height);
-    // }
+    public AutonomousCounters autonomousCounters;
+    public TeleOpCounters teleOpCounters;
+    public GameObject data;
+    public NotificationSystem notificationSystem;
 
     void Start()
     {
+        GameObject.Find("Data").GetComponent<Data>();
         cRawImage = GetComponent<RawImage>();
         width = Convert.ToInt32(cRawImage.rectTransform.rect.width);
         height = Convert.ToInt32(cRawImage.rectTransform.rect.height);
@@ -37,14 +33,17 @@ public class GenerateQRCode : MonoBehaviour
 
     public void GenerateQRCodeButton()
     {
-        data = teamNumberInputField.text + " " + nameInputField.text;
-
         cRawImage = GetComponent<RawImage>();
         // Generate the texture
-        Texture2D tex = GenerateBarcode(data, format, width, height);
+
+        string json = data.GetComponent<Data>().SerializeToJson();
+
+        Texture2D tex = GenerateBarcode(json, format, width, height);
         // Setup the RawImage
         cRawImage.texture = tex;
         cRawImage.rectTransform.sizeDelta = new Vector2(tex.width, tex.height);
+
+        notificationSystem.FinishedGeneratingQRCode();
     }
 
     private Texture2D GenerateBarcode(string data, BarcodeFormat format, int width, int height)
