@@ -1,0 +1,32 @@
+{
+    "scoutingData": [
+        {
+            "name": "Joel Bilburn",
+            "matchNumber": "0",
+            "teamName": "12344",
+            "autonomousInnerCount": "4",
+            "autonomousInnerInnerCount": "3",
+            "autonomousOuterCount": "11",
+            "teleOpInnerCount": "9",
+            "teleOpInnerInnerCount": "5",
+            "teleOpOuterCount": "15",
+            "drivingEffectiveness": "4",
+            "defenseEffectiveness": "0",
+            "additionalNotes": "Didn't play defense but had good driving"
+        },
+        {
+            "name": "Dave Schwartz",
+            "matchNumber": "1",
+            "teamName": "12344",
+            "autonomousInnerCount": "4",
+            "autonomousInnerInnerCount": "13",
+            "autonomousOuterCount": "4",
+            "teleOpInnerCount": "8",
+            "teleOpInnerInnerCount": "6",
+            "teleOpOuterCount": "1",
+            "drivingEffectiveness": "2",
+            "defenseEffectiveness": "0",
+            "additionalNotes": "Didn't have the best driving and didn't play defense"
+        }
+    ]
+}
