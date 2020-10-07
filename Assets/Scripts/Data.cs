@@ -113,10 +113,10 @@ public class DataToExport
 public class Container
 {
     [SerializeField]
-    public List<DataToExport> scoutingData;
+    public List<DataToExport> ScoutingData;
 
     public Container(List<DataToExport> _dataList)
     {
-        scoutingData = _dataList;
+        ScoutingData = _dataList;
     }
 }

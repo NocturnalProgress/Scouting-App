@@ -7,9 +7,14 @@ public class SerializeData : MonoBehaviour
 {
     //Exports data to Json
 
-    private string jsonPath = "Assets/data.json";
+    private string jsonPath;
     public GameObject data;
     public NotificationSystem notificationSystem;
+
+    void Start()
+    {
+        jsonPath = Application.persistentDataPath + "/data.json";
+    }
 
     public void SaveToJson()
     {
