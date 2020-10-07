@@ -5,7 +5,6 @@ using UnityEngine;
 public class NotificationSystem : MonoBehaviour
 {
     public GameObject notificationPrefab;
-    public GameObject content;
     [HideInInspector] public int index;
 
     // Start is called before the first frame update
@@ -22,9 +21,8 @@ public class NotificationSystem : MonoBehaviour
 
     public void DisplayNotificationCanvas()
     {
-        Debug.Log("Spawned Notification!");
         GameObject notification = Instantiate(notificationPrefab.gameObject, new Vector3(0, 0, 0), transform.rotation) as GameObject;
-        notification.transform.SetParent(content.transform, false);
+        notification.transform.SetParent(gameObject.transform, false);
         notification.transform.localScale = new Vector3(1, 1, 1);
 
         switch (index)
@@ -39,7 +37,7 @@ public class NotificationSystem : MonoBehaviour
                 notification.GetComponent<Notification>().notificationMessage.text = "Finished creating QR Code!";
                 break;
             default:
-                Debug.Log("Error!");
+                // Debug.Log("Error!");
                 break;
         }
         index = 0;
