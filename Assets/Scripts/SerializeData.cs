@@ -13,7 +13,17 @@ public class SerializeData : MonoBehaviour
 
     void Start()
     {
+#if UNITY_EDITOR
+        jsonPath = Application.persistentDataPath + "/ScoutingData/data.json";
+#elif UNITY_STANDALONE_WIN
+        jsonPath = Application.persistentDataPath + "/ScoutingData/data.json";
+#elif UNITY_IOS
         jsonPath = Application.persistentDataPath + "/data.json";
+#elif UNITY_STANDALONE_OSX
+        jsonPath = Application.persistentDataPath + "/data.json";
+#endif
+
+
     }
 
     public void SaveToJson()
