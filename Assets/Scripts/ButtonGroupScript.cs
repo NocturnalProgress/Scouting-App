@@ -12,6 +12,16 @@ public class ButtonGroupScript : MonoBehaviour
     public Canvas endGameCanvas;
     public Canvas submitDataCanvas;
 
+    void Start()
+    {
+        mainCanvas.rootCanvas.enabled = true;
+        initialDataCanvas.rootCanvas.enabled = false;
+        autonomousCanvas.rootCanvas.enabled = false;
+        teleOpCanvas.rootCanvas.enabled = false;
+        endGameCanvas.rootCanvas.enabled = false;
+        submitDataCanvas.rootCanvas.enabled = false;
+    }
+
     public void MainButton()
     {
         mainCanvas.rootCanvas.enabled = true;
