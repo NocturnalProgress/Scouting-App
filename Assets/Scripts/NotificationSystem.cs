@@ -5,59 +5,42 @@ using UnityEngine;
 public class NotificationSystem : MonoBehaviour
 {
     public GameObject notificationPrefab;
-    [HideInInspector] public int index;
 
-    // Start is called before the first frame update
-    void Start()
+    private GameObject notification;
+
+    public void DisplayNotificationCanvas(int index)
     {
-        index = 0;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void DisplayNotificationCanvas()
-    {
-        GameObject notification = Instantiate(notificationPrefab.gameObject, new Vector3(0, 0, 0), transform.rotation) as GameObject;
+        notification = Instantiate(notificationPrefab.gameObject, new Vector3(0, 0, 0), transform.rotation) as GameObject;
         notification.transform.SetParent(gameObject.transform, false);
         notification.transform.localScale = new Vector3(1, 1, 1);
 
         switch (index)
         {
-            case 3: // Finished saving scouting data
-                notification.GetComponent<Notification>().notificationMessage.text = "Finished saving scouting data!";
+            case 2: // Error: Asset is null
+                SetNotificationMessage("Error! Json file is null!");
                 break;
-            case 2: // Finished exporting scouting data
-                notification.GetComponent<Notification>().notificationMessage.text = "Finished exporting scouting data!";
-                break;
-            case 1: // Finished generating QR Code
-                notification.GetComponent<Notification>().notificationMessage.text = "Finished creating QR Code!";
+            case 1: // Finished exporting scouting data
+                SetNotificationMessage("Finished exporting scouting data!");
                 break;
             default:
-                // Debug.Log("Error!");
+                SetNotificationMessage("Error! Invalid notification code!");
                 break;
         }
         index = 0;
     }
 
-    public void FinishedSaving()
+    public void ErrorNullAsset()
     {
-        index = 3;
-        DisplayNotificationCanvas();
+        DisplayNotificationCanvas(2);
     }
 
     public void FinishedExportingData()
     {
-        index = 2;
-        DisplayNotificationCanvas();
+        DisplayNotificationCanvas(1);
     }
 
-    public void FinishedGeneratingQRCode()
+    private void SetNotificationMessage(string message)
     {
-        index = 1;
-        DisplayNotificationCanvas();
+        notification.GetComponent<Notification>().notificationMessage.text = message;
     }
 }

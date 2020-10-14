@@ -13,6 +13,7 @@ public class ExportToCSV : MonoBehaviour
     [SerializeField]
     public ScoutingDataList scoutingDataList = new ScoutingDataList();
     public TMP_InputField fileLocationInputField;
+    public NotificationSystem notificationSystem;
 
     private string importDataPath;
     private TextAsset jsonFile;
@@ -40,9 +41,8 @@ public class ExportToCSV : MonoBehaviour
         }
         else
         {
-            Debug.Log("File exists.. not adding titles");
+            // Debug.Log("File exists.. not adding titles");
         }
-
 
         foreach (string filePath in Directory.GetFiles(importDataPath))
         {
@@ -70,17 +70,17 @@ public class ExportToCSV : MonoBehaviour
                     rowDataTemp[10] = scoutingData.defenseEffectiveness;
                     rowDataTemp[11] = scoutingData.additionalNotes;
                     rowData.Add(rowDataTemp);
-                    Debug.Log("Test: " + scoutingDataList.ScoutingData[x].name.ToString());
+                    // Debug.Log("Test: " + scoutingDataList.ScoutingData[x].name.ToString());
                     x++;
                 }
             }
             else
             {
-                Debug.Log("Asset is null");
+                notificationSystem.ErrorNullAsset();
             }
         }
 
-        StreamWriter outStream = System.IO.File.CreateText(getPath());
+        StreamWriter outStream = System.IO.File.CreateText(Application.persistentDataPath + "/Spreadsheets/" + "Scouting_Data.csv");
 
         string[][] output = new string[rowData.Count][];
 
@@ -98,24 +98,12 @@ public class ExportToCSV : MonoBehaviour
             sb.AppendLine(string.Join(delimiter, output[index]));
 
 
-        Debug.Log("Exporting to CSV!");
+        // Debug.Log("Exporting to CSV!");
 
         outStream.WriteLine(sb);
         outStream.Close();
-    }
 
-    // Following method is used to retrive the relative path as device platform
-    public string getPath()
-    {
-        // #if UNITY_EDITOR
-        return Application.persistentDataPath + "/Spreadsheets/" + "Saved_data.csv";
-        // #elif UNITY_ANDROID
-        //         return Application.persistentDataPath+"Saved_data.csv";
-        // #elif UNITY_IPHONE
-        //         return Application.persistentDataPath+"/"+"Saved_data.csv";
-        // #else
-        //         return Application.dataPath + "/" + "Saved_data.csv";
-        // #endif
+        notificationSystem.FinishedExportingData();
     }
 
     void CheckFolderExistence(string folderLocation)
@@ -127,9 +115,8 @@ public class ExportToCSV : MonoBehaviour
     }
 
 
-    void AddTitles()
+    void AddTitles() // Add titles to the CSV file
     {
-        // Creating First row of titles manually..
         rowDataTemp = new string[12];
         rowDataTemp[0] = "Name";
         rowDataTemp[1] = "Match Number";
