@@ -12,7 +12,6 @@ public class ExportToCSV : MonoBehaviour
     private List<string[]> rowData = new List<string[]>();
     [SerializeField]
     public ScoutingDataList scoutingDataList = new ScoutingDataList();
-    public TMP_InputField fileLocationInputField;
     public NotificationSystem notificationSystem;
 
     private string importDataPath;
@@ -24,7 +23,6 @@ public class ExportToCSV : MonoBehaviour
     {
         CheckFolderExistence("/ImportData");
         CheckFolderExistence("/Spreadsheets");
-        fileLocationInputField.text = Application.persistentDataPath;
 
         importDataPath = Application.persistentDataPath + "/ImportData/";
         // Debug.Log("Data Path: " + Application.dataPath);
@@ -104,9 +102,11 @@ public class ExportToCSV : MonoBehaviour
         outStream.Close();
 
         notificationSystem.FinishedExportingData();
+
+        OpenInFiles("/Spreadsheets/");
     }
 
-    void CheckFolderExistence(string folderLocation)
+    private void CheckFolderExistence(string folderLocation)
     {
         if (!Directory.Exists(Application.persistentDataPath + folderLocation))
         {
@@ -115,7 +115,7 @@ public class ExportToCSV : MonoBehaviour
     }
 
 
-    void AddTitles() // Add titles to the CSV file
+    private void AddTitles() // Add titles to the CSV file
     {
         rowDataTemp = new string[12];
         rowDataTemp[0] = "Name";
@@ -131,5 +131,14 @@ public class ExportToCSV : MonoBehaviour
         rowDataTemp[10] = "Defense Effectiveness";
         rowDataTemp[11] = "Additional Notes";
         rowData.Add(rowDataTemp);
+    }
+
+    public void OpenInFiles(string folderPathToOpen)
+    {
+        string folderPath = Application.persistentDataPath + folderPathToOpen;
+        // System.Diagnostics.Process.Start("explorer.exe", "/select," + folderPathToOpen);
+        // System.Diagnostics.Process.Start("explorer.exe", "/select," + Application.persistentDataPath);
+
+        Application.OpenURL("file://" + folderPath);
     }
 }
