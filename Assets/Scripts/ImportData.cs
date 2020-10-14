@@ -14,10 +14,10 @@ public class ImportData : MonoBehaviour
 
     void Start()
     {
-        fileLocationInputField.text = Application.persistentDataPath;
+        // fileLocationInputField.text = Application.persistentDataPath;
 
-        path = Application.persistentDataPath + "/ImportData/data.json";
-
+        // path = Application.persistentDataPath + "/ImportData/data.json";
+        path = Application.persistentDataPath + "/ImportData/";
     }
 
     public void ImportJsonFile()
@@ -64,5 +64,16 @@ public class ImportData : MonoBehaviour
         // scoutingDataContainer.Add(JsonUtility.FromJson<List<ScoutingData>>(jsonFile));
 
         // Debug.Log(scoutingData.name);
+    }
+
+
+    public void GetAllFiles()
+    {
+        foreach (string filePath in Directory.GetFiles(path))
+        {
+            jsonFile = new TextAsset(File.ReadAllText(filePath));
+
+            Debug.Log(jsonFile);
+        }
     }
 }
