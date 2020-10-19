@@ -16,6 +16,7 @@ public class Data : MonoBehaviour
     public TMP_InputField additionalNotesInputField;
     public TMP_Dropdown drivingEffectivenessDropDown;
     public TMP_Dropdown defenseEffectivenessDropDown;
+    public TMP_Dropdown climbingEffectivenssDropDrown;
     [HideInInspector] public string data;
     public NotificationSystem notificationSystem;
 
@@ -23,23 +24,26 @@ public class Data : MonoBehaviour
     [SerializeField]
     public List<DataToExport> scoutingDataContainer = new List<DataToExport>();
 
+    public DataToExport dataToExport = new DataToExport();
+
     public void AddToJsonList()
     {
-        DataToExport dataToExport = new DataToExport();
         dataToExport.name = nameInputField.text;
         dataToExport.teamName = teamNameInputField.text;
         dataToExport.matchNumber = matchNumberInputField.text;
 
+        dataToExport.autonomousUpperCount = autonomousCounters.upperCount.ToString();
         dataToExport.autonomousInnerCount = autonomousCounters.innerCount.ToString();
-        dataToExport.autonomousInnerInnerCount = autonomousCounters.innerInnerCount.ToString();
-        dataToExport.autonomousOuterCount = autonomousCounters.outerCount.ToString();
+        dataToExport.autonomousLowerCount = autonomousCounters.lowerCount.ToString();
 
+
+        dataToExport.teleOpUpperCount = teleOpCounters.upperCount.ToString();
         dataToExport.teleOpInnerCount = teleOpCounters.innerCount.ToString();
-        dataToExport.teleOpInnerInnerCount = teleOpCounters.innerInnerCount.ToString();
-        dataToExport.teleOpOuterCount = teleOpCounters.outerCount.ToString();
+        dataToExport.teleOpLowerCount = teleOpCounters.lowerCount.ToString();
 
         dataToExport.drivingEffectiveness = drivingEffectivenessDropDown.value.ToString();
         dataToExport.defenseEffectiveness = defenseEffectivenessDropDown.value.ToString();
+        dataToExport.climbingEffectiveness = climbingEffectivenssDropDrown.options[climbingEffectivenssDropDrown.value].text;
         dataToExport.additionalNotes = additionalNotesInputField.text;
 
         scoutingDataContainer.Add(dataToExport);
@@ -67,26 +71,27 @@ public class Data : MonoBehaviour
         teamNameInputField.text = "";
 
         // Autonomous
+        autonomousCounters.upperCount = 0;
         autonomousCounters.innerCount = 0;
-        autonomousCounters.innerInnerCount = 0;
-        autonomousCounters.outerCount = 0;
+        autonomousCounters.lowerCount = 0;
 
+        autonomousCounters.upperCounter.text = "0";
         autonomousCounters.innerCounter.text = "0";
-        autonomousCounters.innerInnerCounter.text = "0";
-        autonomousCounters.outerCounter.text = "0";
+        autonomousCounters.lowerCounter.text = "0";
 
         // TeleOp
+        teleOpCounters.upperCount = 0;
         teleOpCounters.innerCount = 0;
-        teleOpCounters.innerInnerCount = 0;
-        teleOpCounters.outerCount = 0;
+        teleOpCounters.lowerCount = 0;
 
+        teleOpCounters.upperCounter.text = "0";
         teleOpCounters.innerCounter.text = "0";
-        teleOpCounters.innerInnerCounter.text = "0";
-        teleOpCounters.outerCounter.text = "0";
+        teleOpCounters.lowerCounter.text = "0";
 
         // End Game
         drivingEffectivenessDropDown.value = 0;
         defenseEffectivenessDropDown.value = 0;
+        climbingEffectivenssDropDrown.value = 0;
         additionalNotesInputField.text = "";
     }
 }
@@ -97,14 +102,15 @@ public class DataToExport
     public string name;
     public string matchNumber;
     public string teamName;
+    public string autonomousUpperCount;
     public string autonomousInnerCount;
-    public string autonomousInnerInnerCount;
-    public string autonomousOuterCount;
+    public string autonomousLowerCount;
+    public string teleOpUpperCount;
     public string teleOpInnerCount;
-    public string teleOpInnerInnerCount;
-    public string teleOpOuterCount;
+    public string teleOpLowerCount;
     public string drivingEffectiveness;
     public string defenseEffectiveness;
+    public string climbingEffectiveness;
     public string additionalNotes;
 }
 
