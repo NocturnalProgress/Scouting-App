@@ -10,30 +10,52 @@ public class AutonomousCounters : MonoBehaviour
 {
     // [HideInInspector]
 
+    public int upperCount;
     public int innerCount;
-    public int innerInnerCount;
-    public int outerCount;
+    public int lowerCount;
 
-    [HideInInspector] public TMP_Text innerCounter;
-    [HideInInspector] public TMP_Text innerInnerCounter;
-    [HideInInspector] public TMP_Text outerCounter;
 
-    [HideInInspector] public Button subtractInnerCounter;
-    [HideInInspector] public Button addInnerCounter;
-    [HideInInspector] public Button subtractInnerInnerCounter;
-    [HideInInspector] public Button addInnerInnerCounter;
-    [HideInInspector] public Button subtractOuterCounter;
-    [HideInInspector] public Button addOuterCounter;
+    public TMP_Text upperCounter;
+
+    public TMP_Text innerCounter;
+
+    public TMP_Text lowerCounter;
+
+
+    public Button subtractUpperCounter;
+
+    public Button addUpperCounter;
+
+    public Button subtractInnerCounter;
+
+    public Button addInnerCounter;
+
+    public Button subtractLowerCounter;
+
+    public Button addLowerCounter;
 
     void Start()
     {
+        upperCount = Convert.ToInt32(upperCounter.text);
         innerCount = Convert.ToInt32(innerCounter.text);
-        innerInnerCount = Convert.ToInt32(innerInnerCounter.text);
-        outerCount = Convert.ToInt32(outerCounter.text);
+        lowerCount = Convert.ToInt32(lowerCounter.text);
     }
 
     //Inner
-    public void SubtractFromInnerCounter()
+    public void SubtractFromUpperCounter()
+    {
+        upperCount = upperCount - 1;
+        UpdateUpperCount();
+    }
+
+    public void AddToUpperCounter()
+    {
+        upperCount = upperCount + 1;
+        UpdateUpperCount();
+    }
+
+    //InnerInner
+    public void SubtractFromInnerCount()
     {
         innerCount = innerCount - 1;
         UpdateInnerCount();
@@ -45,30 +67,22 @@ public class AutonomousCounters : MonoBehaviour
         UpdateInnerCount();
     }
 
-    //InnerInner
-    public void SubtractFromInnerInnerCounter()
-    {
-        innerInnerCount = innerInnerCount - 1;
-        UpdateInnerInnerCount();
-    }
-
-    public void AddToInnerInnerCounter()
-    {
-        innerInnerCount = innerInnerCount + 1;
-        UpdateInnerInnerCount();
-    }
-
     //Outer
-    public void SubtractFromOuterCounter()
+    public void SubtractFromLowerCounter()
     {
-        outerCount = outerCount - 1;
-        UpdateOuterCount();
+        lowerCount = lowerCount - 1;
+        UpdateLowerCount();
     }
 
-    public void AddToOuterCounter()
+    public void AddToLowerCounter()
     {
-        outerCount = outerCount + 1;
-        UpdateOuterCount();
+        lowerCount = lowerCount + 1;
+        UpdateLowerCount();
+    }
+
+    private void UpdateUpperCount()
+    {
+        upperCounter.text = upperCount.ToString();
     }
 
     private void UpdateInnerCount()
@@ -76,14 +90,9 @@ public class AutonomousCounters : MonoBehaviour
         innerCounter.text = innerCount.ToString();
     }
 
-    private void UpdateInnerInnerCount()
+    private void UpdateLowerCount()
     {
-        innerInnerCounter.text = innerInnerCount.ToString();
-    }
-
-    private void UpdateOuterCount()
-    {
-        outerCounter.text = outerCount.ToString();
+        lowerCounter.text = lowerCount.ToString();
     }
 
 }
