@@ -1106,7 +1106,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 280, y: 125}
+  m_SizeDelta: {x: 265, y: 125}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &192642076
 GameObject:
@@ -1534,7 +1534,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Power Cells shot upper
+  m_text: Power Cells Shot Upper
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -2582,7 +2582,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Power Cells shot lower
+  m_text: Power Cells Shot Lower
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -4867,7 +4867,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 125}
+  m_SizeDelta: {x: 265, y: 125}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &825169104
 GameObject:
@@ -7872,7 +7872,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Power Cells shot inner
+  m_text: Power Cells Shot Inner
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -8312,7 +8312,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 260, y: 125}
+  m_SizeDelta: {x: 265, y: 125}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1193764669
 GameObject:
@@ -8406,7 +8406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Power Cells shot lower
+  m_text: Power Cells Shot Lower
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -9646,7 +9646,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Power Cells shot upper
+  m_text: Power Cells Shot Upper
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -10035,6 +10035,7 @@ MonoBehaviour:
   additionalNotesInputField: {fileID: 1310101079}
   drivingEffectivenessDropDown: {fileID: 274452127}
   defenseEffectivenessDropDown: {fileID: 1810319610}
+  climbingEffectivenssDropDrown: {fileID: 1287532704}
   data: 
   notificationSystem: {fileID: 966434376}
   scoutingDataContainer: []
@@ -10050,6 +10051,7 @@ MonoBehaviour:
     teleOpLowerCount: 
     drivingEffectiveness: 
     defenseEffectiveness: 
+    climbingEffectiveness: 
     additionalNotes: 
 --- !u!4 &1317415977
 Transform:
@@ -11842,7 +11844,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Power Cells shot inner
+  m_text: Power Cells Shot Inner
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -13259,7 +13261,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 330, y: 125}
+  m_SizeDelta: {x: 265, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1601356955
 GameObject:
@@ -15964,7 +15966,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 125}
+  m_SizeDelta: {x: 265, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1879636594
 GameObject:
@@ -16001,7 +16003,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 125}
+  m_SizeDelta: {x: 265, y: 125}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1886732537
 GameObject:
