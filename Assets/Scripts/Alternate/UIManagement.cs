@@ -50,8 +50,6 @@ public class UIManagement : MonoBehaviour
     }
 
 
-
-
     public void DisplayAutonomousPowerPortScouting()
     {
         autonomousScoutingCanvas.enabled = true;
@@ -63,5 +61,4 @@ public class UIManagement : MonoBehaviour
         autonomousScoutingCanvas.enabled = false;
         teleOpScoutingCanvas.enabled = true;
     }
-
 }
