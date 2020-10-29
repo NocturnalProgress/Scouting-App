@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.IO;
 using TMPro;
 
 public class SerializeData : MonoBehaviour
@@ -22,18 +23,39 @@ public class SerializeData : MonoBehaviour
     {
         int randomNumber = UnityEngine.Random.Range(00000, 99999);
 
-#if UNITY_EDITOR
         jsonPath = Application.persistentDataPath + "/ScoutingData" + randomNumber + ".json";
-#elif UNITY_STANDALONE_WIN
-        jsonPath = Application.persistentDataPath + "/ScoutingData" + randomNumber + ".json";
-#elif UNITY_IOS
-        jsonPath = Application.persistentDataPath + "/ScoutingData" + randomNumber + ".json";
-#elif UNITY_STANDALONE_OSX
-        jsonPath = Application.persistentDataPath + "/ScoutingData" + randomNumber + ".json";
-#endif
 
         string json = data.GetComponent<Data>().SerializeToJson();
         System.IO.File.WriteAllText(jsonPath, json);
         notificationSystem.FinishedExportingData();
+
+        // GeneralSharingiOSBridge.ShareSimpleText(Resources.Load(jsonPath) as TextAsset);
+
+        StartCoroutine(TakeScreenshotAndShare());
+    }
+
+    private IEnumerator TakeScreenshotAndShare()
+    {
+        yield return new WaitForEndOfFrame();
+
+        // Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        // ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        // ss.Apply();
+
+        // string filePath = Path.Combine(Application.temporaryCachePath, "shared img.png");
+        // File.WriteAllBytes(filePath, ss.EncodeToPNG());
+
+        // To avoid memory leaks
+        // Destroy(ss);
+
+
+        new NativeShare().AddFile(jsonPath)
+            .SetSubject("Scouting Data").SetText("Hello world!")
+            .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget))
+            .Share();
+
+        // Share on WhatsApp only, if installed (Android only)
+        //if( NativeShare.TargetExists( "com.whatsapp" ) )
+        //	new NativeShare().AddFile( filePath ).AddTarget( "com.whatsapp" ).Share();
     }
 }
