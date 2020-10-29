@@ -11,74 +11,113 @@ public class ButtonGroupScript : MonoBehaviour
     public Canvas teleOpCanvas;
     public Canvas endGameCanvas;
     public Canvas submitDataCanvas;
+    public Canvas selectionCanvas;
+
+    private bool firstButtonPressed = false;
+    private bool reset = false;
+    private float timeOfFirstButton = 0f;
+
 
     void Start()
     {
-        mainCanvas.rootCanvas.enabled = true;
-        initialDataCanvas.rootCanvas.enabled = false;
-        autonomousCanvas.rootCanvas.enabled = false;
-        teleOpCanvas.rootCanvas.enabled = false;
-        endGameCanvas.rootCanvas.enabled = false;
-        submitDataCanvas.rootCanvas.enabled = false;
+        mainCanvas.enabled = true;
+        initialDataCanvas.enabled = false;
+        autonomousCanvas.enabled = false;
+        teleOpCanvas.enabled = false;
+        endGameCanvas.enabled = false;
+        submitDataCanvas.enabled = false;
+        selectionCanvas.enabled = false;
     }
 
     public void MainButton()
     {
-        mainCanvas.rootCanvas.enabled = true;
-        initialDataCanvas.rootCanvas.enabled = false;
-        autonomousCanvas.rootCanvas.enabled = false;
-        teleOpCanvas.rootCanvas.enabled = false;
-        endGameCanvas.rootCanvas.enabled = false;
-        submitDataCanvas.rootCanvas.enabled = false;
+        mainCanvas.enabled = true;
+        initialDataCanvas.enabled = false;
+        autonomousCanvas.enabled = false;
+        teleOpCanvas.enabled = false;
+        endGameCanvas.enabled = false;
+        submitDataCanvas.enabled = false;
+        selectionCanvas.enabled = false;
     }
 
     public void InitalDataButton()
     {
-        mainCanvas.rootCanvas.enabled = false;
-        initialDataCanvas.rootCanvas.enabled = true;
-        autonomousCanvas.rootCanvas.enabled = false;
-        teleOpCanvas.rootCanvas.enabled = false;
-        endGameCanvas.rootCanvas.enabled = false;
-        submitDataCanvas.rootCanvas.enabled = false;
+        mainCanvas.enabled = false;
+        initialDataCanvas.enabled = true;
+        autonomousCanvas.enabled = false;
+        teleOpCanvas.enabled = false;
+        endGameCanvas.enabled = false;
+        submitDataCanvas.enabled = false;
+        selectionCanvas.enabled = false;
     }
 
     public void AutonomousButton()
     {
-        mainCanvas.rootCanvas.enabled = false;
-        initialDataCanvas.rootCanvas.enabled = false;
-        autonomousCanvas.rootCanvas.enabled = true;
-        teleOpCanvas.rootCanvas.enabled = false;
-        endGameCanvas.rootCanvas.enabled = false;
-        submitDataCanvas.rootCanvas.enabled = false;
+        mainCanvas.enabled = false;
+        initialDataCanvas.enabled = false;
+        autonomousCanvas.enabled = true;
+        teleOpCanvas.enabled = false;
+        endGameCanvas.enabled = false;
+        submitDataCanvas.enabled = false;
+        selectionCanvas.enabled = false;
     }
 
     public void TeleOpButton()
     {
-        mainCanvas.rootCanvas.enabled = false;
-        initialDataCanvas.rootCanvas.enabled = false;
-        autonomousCanvas.rootCanvas.enabled = false;
-        teleOpCanvas.rootCanvas.enabled = true;
-        endGameCanvas.rootCanvas.enabled = false;
-        submitDataCanvas.rootCanvas.enabled = false;
+        mainCanvas.enabled = false;
+        initialDataCanvas.enabled = false;
+        autonomousCanvas.enabled = false;
+        teleOpCanvas.enabled = true;
+        endGameCanvas.enabled = false;
+        submitDataCanvas.enabled = false;
+        selectionCanvas.enabled = false;
     }
 
     public void EndGameButton()
     {
-        mainCanvas.rootCanvas.enabled = false;
-        initialDataCanvas.rootCanvas.enabled = false;
-        autonomousCanvas.rootCanvas.enabled = false;
-        teleOpCanvas.rootCanvas.enabled = false;
-        endGameCanvas.rootCanvas.enabled = true;
-        submitDataCanvas.rootCanvas.enabled = false;
+        mainCanvas.enabled = false;
+        initialDataCanvas.enabled = false;
+        autonomousCanvas.enabled = false;
+        teleOpCanvas.enabled = false;
+        endGameCanvas.enabled = true;
+        submitDataCanvas.enabled = false;
+        selectionCanvas.enabled = false;
     }
 
     public void SubmitDataButton()
     {
-        mainCanvas.rootCanvas.enabled = false;
-        initialDataCanvas.rootCanvas.enabled = false;
-        autonomousCanvas.rootCanvas.enabled = false;
-        teleOpCanvas.rootCanvas.enabled = false;
-        endGameCanvas.rootCanvas.enabled = false;
-        submitDataCanvas.rootCanvas.enabled = true;
+        mainCanvas.enabled = false;
+        initialDataCanvas.enabled = false;
+        autonomousCanvas.enabled = false;
+        teleOpCanvas.enabled = false;
+        endGameCanvas.enabled = false;
+        submitDataCanvas.enabled = true;
+        selectionCanvas.enabled = false;
+    }
+
+    public void EnableSelectionButton()
+    {
+        if (firstButtonPressed == true)
+        {
+            if (Time.time - timeOfFirstButton > 0.1f)
+            {
+                selectionCanvas.enabled = false;
+            }
+            reset = true;
+        }
+
+        if (firstButtonPressed == false)
+        {
+            firstButtonPressed = true;
+            timeOfFirstButton = Time.time;
+            selectionCanvas.enabled = true;
+        }
+
+        if (reset)
+        {
+            firstButtonPressed = false;
+            reset = false;
+        }
+
     }
 }
