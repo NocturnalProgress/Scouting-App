@@ -7,19 +7,16 @@ public class NotificationSystem : MonoBehaviour
     public GameObject notificationPrefab;
     [HideInInspector] public int index;
 
+    private string message;
+
     // Start is called before the first frame update
     void Start()
     {
         index = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
-
-    public void DisplayNotificationCanvas()
+    public void DisplayNotificationCanvas(string message)
     {
         GameObject notification = Instantiate(notificationPrefab.gameObject, new Vector3(0, 0, 0), transform.rotation) as GameObject;
         notification.transform.SetParent(gameObject.transform, false);
@@ -27,6 +24,9 @@ public class NotificationSystem : MonoBehaviour
 
         switch (index)
         {
+            case 7:
+                notification.GetComponent<Notification>().notificationMessage.text = "Deleted " + message;
+                break;
             case 6:
                 notification.GetComponent<Notification>().notificationMessage.text = "Error uploading form";
                 break;
@@ -52,38 +52,44 @@ public class NotificationSystem : MonoBehaviour
         index = 0;
     }
 
+    public void DeletedScoutingData(string fileName)
+    {
+        index = 7;
+        DisplayNotificationCanvas(fileName);
+    }
+
     public void ErrorUploadingForm()
     {
         index = 6;
-        DisplayNotificationCanvas();
+        DisplayNotificationCanvas(message);
     }
     public void FormUploadComplete()
     {
         index = 5;
-        DisplayNotificationCanvas();
+        DisplayNotificationCanvas(message);
     }
 
     public void NotConnectedToInternet()
     {
         index = 4;
-        DisplayNotificationCanvas();
+        DisplayNotificationCanvas(message);
     }
 
     public void FinishedSaving()
     {
         index = 3;
-        DisplayNotificationCanvas();
+        DisplayNotificationCanvas(message);
     }
 
     public void FinishedExportingData()
     {
         index = 2;
-        DisplayNotificationCanvas();
+        DisplayNotificationCanvas(message);
     }
 
     public void FinishedGeneratingQRCode()
     {
         index = 1;
-        DisplayNotificationCanvas();
+        DisplayNotificationCanvas(message);
     }
 }
