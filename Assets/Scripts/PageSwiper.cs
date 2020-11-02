@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     private Vector3 panelLocation;
-    public float percentThreshold = 0.2f;
-    public float easing = 0.5f;
-    public int totalPages = 1;
+    private float percentThreshold = 0.2f;
+    private float easing = 0.1f;
+    private int totalPages = 7;
     private int currentPage = 1;
     private HorizontalLayoutGroup horizontalLayoutGroup;
     private RectTransform canvasHolderRectTransform;
