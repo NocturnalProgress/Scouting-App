@@ -7,18 +7,18 @@ public class UIManager : MonoBehaviour
 {
     public Canvas parentCanvas;
 
-    private RectTransform parentRectTransform;
-
     public GameObject panel1;
     public GameObject panel2;
     public GameObject panel3;
     public GameObject panel4;
     public GameObject panel5;
     public GameObject panel6;
+    public GameObject panel7;
 
+    private RectTransform parentRectTransform;
 
     // Start is called before the first frame update
-    void Start()
+    void Start() // Resizes panels under PanelHolder based on screen size
     {
         parentRectTransform = parentCanvas.gameObject.GetComponent<RectTransform>();
 
@@ -28,11 +28,6 @@ public class UIManager : MonoBehaviour
         panel4.GetComponent<RectTransform>().sizeDelta = new Vector2(parentRectTransform.sizeDelta.x, parentRectTransform.sizeDelta.y);
         panel5.GetComponent<RectTransform>().sizeDelta = new Vector2(parentRectTransform.sizeDelta.x, parentRectTransform.sizeDelta.y);
         panel6.GetComponent<RectTransform>().sizeDelta = new Vector2(parentRectTransform.sizeDelta.x, parentRectTransform.sizeDelta.y);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        panel7.GetComponent<RectTransform>().sizeDelta = new Vector2(parentRectTransform.sizeDelta.x, parentRectTransform.sizeDelta.y);
     }
 }
