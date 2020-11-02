@@ -118,6 +118,5 @@ public class ButtonGroupScript : MonoBehaviour
             firstButtonPressed = false;
             reset = false;
         }
-
     }
 }
