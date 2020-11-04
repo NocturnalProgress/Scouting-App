@@ -14,6 +14,8 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
     private HorizontalLayoutGroup horizontalLayoutGroup;
     private RectTransform canvasHolderRectTransform;
 
+    private RectTransform maimMenuRectTransform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,8 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
 
         horizontalLayoutGroup = GetComponent<HorizontalLayoutGroup>();
         canvasHolderRectTransform = GetComponent<RectTransform>();
+
+        maimMenuRectTransform = GetComponent<RectTransform>();
 
         if ((UnityEngine.iOS.Device.generation.ToString()).IndexOf("iPad") > -1)
         {
@@ -34,11 +38,13 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
         }
 
     }
+
     public void OnDrag(PointerEventData data)
     {
         float difference = data.pressPosition.x - data.position.x;
         transform.position = panelLocation - new Vector3(difference, 0, 0);
     }
+
     public void OnEndDrag(PointerEventData data)
     {
         float percentage = (data.pressPosition.x - data.position.x) / Screen.width;
@@ -63,6 +69,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
             StartCoroutine(SmoothMove(transform.position, panelLocation, easing));
         }
     }
+
     IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds)
     {
         float t = 0f;
@@ -72,5 +79,11 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
             transform.position = Vector3.Lerp(startpos, endpos, Mathf.SmoothStep(0f, 1f, t));
             yield return null;
         }
+    }
+
+    public void ReturnToInitalData()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        currentPage = 1;
     }
 }
