@@ -83,7 +83,14 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void ReturnToInitalData()
     {
-        transform.position = new Vector3(0, 0, 0);
-        currentPage = 1;
+        while (currentPage != 1)
+        {
+            Vector3 newLocation = panelLocation;
+            currentPage--;
+            newLocation += new Vector3(Screen.width, 0, 0);
+            StartCoroutine(SmoothMove(transform.position, newLocation, easing));
+            panelLocation = newLocation;
+            currentPage--;
+        }
     }
 }
