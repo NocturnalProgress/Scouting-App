@@ -1,6 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
+/*
+    This script manages all notifications.
+    It creates the notifications and it will give them a message.
+    To add more notifications, this is the place to do it.
+*/
 
 public class NotificationSystem : MonoBehaviour
 {
@@ -10,11 +14,10 @@ public class NotificationSystem : MonoBehaviour
     private string message;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         index = 0;
     }
-
 
     public void DisplayNotificationCanvas(string message)
     {
@@ -27,24 +30,31 @@ public class NotificationSystem : MonoBehaviour
             case 7:
                 notification.GetComponent<Notification>().notificationMessage.text = "Deleted " + message;
                 break;
+
             case 6:
                 notification.GetComponent<Notification>().notificationMessage.text = "Error uploading form";
                 break;
+
             case 5:
                 notification.GetComponent<Notification>().notificationMessage.text = "Form upload complete!";
                 break;
+
             case 4: // Not connected to internet
                 notification.GetComponent<Notification>().notificationMessage.text = "Error: Not connected to internet";
                 break;
+
             case 3: // Finished saving scouting data
                 notification.GetComponent<Notification>().notificationMessage.text = "Finished saving scouting data!";
                 break;
+
             case 2: // Finished exporting scouting data
                 notification.GetComponent<Notification>().notificationMessage.text = "Finished exporting scouting data!";
                 break;
+
             case 1: // Finished generating QR Code
                 notification.GetComponent<Notification>().notificationMessage.text = "Finished creating QR Code!";
                 break;
+
             default:
                 // Debug.Log("Error!");
                 break;
@@ -63,6 +73,7 @@ public class NotificationSystem : MonoBehaviour
         index = 6;
         DisplayNotificationCanvas(message);
     }
+
     public void FormUploadComplete()
     {
         index = 5;

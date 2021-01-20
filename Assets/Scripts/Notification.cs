@@ -1,22 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+
+/*
+    This script is added to the "Notification" prefab when a notification is created.
+    Its job is to remove the notification from the user's screen after a certain amount of time.
+    It's basically a timer.
+*/
 
 public class Notification : MonoBehaviour
 {
     public TMP_Text notificationMessage;
     public Slider slider;
     public float maxTime = 5f;
-    float timeLeft;
+    private float timeLeft;
 
-    void Start()
+    private void Start()
     {
         timeLeft = maxTime;
     }
 
-    void Update()
+    private void Update()
     {
         if (timeLeft > 0)
         {

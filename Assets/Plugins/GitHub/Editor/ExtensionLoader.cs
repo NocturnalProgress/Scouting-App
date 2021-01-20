@@ -1,7 +1,7 @@
+using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
-using System.IO;
-using System;
 
 namespace GitHub.Unity
 {
@@ -56,7 +56,6 @@ namespace GitHub.Unity
                 //ExtensionLoader.instance.Initialized = true;
                 AssetDatabase.SaveAssets();
             }
-
         }
 
         private static void ToggleAssemblies()

@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using TMPro;
+using UnityEngine;
 
 public class Data : MonoBehaviour
 {
@@ -20,7 +19,6 @@ public class Data : MonoBehaviour
     [HideInInspector] public string data;
     public NotificationSystem notificationSystem;
 
-
     [SerializeField]
     public List<DataToExport> scoutingDataContainer = new List<DataToExport>();
 
@@ -35,7 +33,6 @@ public class Data : MonoBehaviour
         dataToExport.autonomousUpperCount = autonomousCounters.upperCount.ToString();
         dataToExport.autonomousInnerCount = autonomousCounters.innerCount.ToString();
         dataToExport.autonomousLowerCount = autonomousCounters.lowerCount.ToString();
-
 
         dataToExport.teleOpUpperCount = teleOpCounters.upperCount.ToString();
         dataToExport.teleOpInnerCount = teleOpCounters.innerCount.ToString();
@@ -53,7 +50,6 @@ public class Data : MonoBehaviour
 
         PrepareForNextMatch();
         notificationSystem.FinishedSaving();
-
     }
 
     public string SerializeToJson()

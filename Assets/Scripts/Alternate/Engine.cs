@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Engine : MonoBehaviour
 {
@@ -17,7 +15,5 @@ public class Engine : MonoBehaviour
     public void Generator(string color)
     {
         Debug.Log(color + " Generator");
-
-
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
 using System.IO;
 using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class LoadScoutingData : MonoBehaviour
 {
@@ -16,21 +16,16 @@ public class LoadScoutingData : MonoBehaviour
 
     private TextAsset jsonFile;
 
-    private bool firstButtonPressed = false;
-    private bool reset = false;
-
-    private float timeOfFirstButton = 0f;
-
-    public void LoadFiles()
+    public void LoadFiles() // Loads all scouting data files
     {
-        foreach (Transform child in scrollViewContent.transform)
+        foreach (Transform child in scrollViewContent.transform) // Removes all scouting data from the scrollview
         {
             Destroy(child.gameObject);
         }
 
         scoutingDataFiles.Clear();
 
-        foreach (string filePath in Directory.GetFiles(Application.persistentDataPath))
+        foreach (string filePath in Directory.GetFiles(Application.persistentDataPath)) // This function adds all scouting data to a list
         {
             if (Path.GetFileName(filePath).Contains("ScoutingData"))
             {
@@ -39,7 +34,7 @@ public class LoadScoutingData : MonoBehaviour
             }
         }
 
-        foreach (KeyValuePair<string, string> scoutingData in scoutingDataFiles)
+        foreach (KeyValuePair<string, string> scoutingData in scoutingDataFiles) // Once the scouting data is loaded, a prefab will be generated for each scouting data that is loaded
         {
             // Debug.Log("Key: " + scoutingData.Key);
             // Debug.Log("Value: " + scoutingData.Value);
@@ -55,12 +50,12 @@ public class LoadScoutingData : MonoBehaviour
         }
     }
 
-    public void OpenShareMenu()
+    public void OpenShareMenu() // This function is called whenever one of the buttons besides "Delete" is pressed
     {
         StartCoroutine(ShareFile());
     }
 
-    public void DeleteFile()
+    public void DeleteFile() // This function deletes a scouting data file
     {
         notificationSystem.DeletedScoutingData(EventSystem.current.currentSelectedGameObject.transform.parent.name);
         // Debug.Log("Deleted: " + EventSystem.current.currentSelectedGameObject.transform.parent.name);
@@ -69,7 +64,7 @@ public class LoadScoutingData : MonoBehaviour
         scoutingDataFiles.Remove(EventSystem.current.currentSelectedGameObject.transform.parent.name);
     }
 
-    private IEnumerator ShareFile()
+    private IEnumerator ShareFile() // This opens the IOS share menu to allow AirDropping
     {
         yield return new WaitForEndOfFrame();
 
@@ -82,7 +77,6 @@ public class LoadScoutingData : MonoBehaviour
 
         // To avoid memory leaks
         // Destroy(ss);
-
 
         new NativeShare().AddFile(Application.persistentDataPath + "/" + EventSystem.current.currentSelectedGameObject.transform.parent.name)
             .SetSubject("Scouting Data")

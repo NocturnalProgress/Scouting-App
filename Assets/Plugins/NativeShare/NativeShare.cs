@@ -1,16 +1,18 @@
-using UnityEngine;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+
 #if !UNITY_EDITOR && ( UNITY_ANDROID || UNITY_IOS )
 using NativeShareNamespace;
 #endif
 
 #pragma warning disable 0414
+
 public class NativeShare
 {
-	public enum ShareResult { Unknown = 0, Shared = 1, NotShared = 2 };
+    public enum ShareResult { Unknown = 0, Shared = 1, NotShared = 2 };
 
-	public delegate void ShareResultCallback( ShareResult result, string shareTarget );
+    public delegate void ShareResultCallback(ShareResult result, string shareTarget);
 
 #if !UNITY_EDITOR && UNITY_ANDROID
 	private static AndroidJavaClass m_ajc = null;
@@ -46,141 +48,141 @@ public class NativeShare
 	private static extern void _NativeShare_Share( string[] files, int filesCount, string subject, string text );
 #endif
 
-	private string subject = string.Empty;
-	private string text = string.Empty;
-	private string title = string.Empty;
+    private string subject = string.Empty;
+    private string text = string.Empty;
+    private string title = string.Empty;
 
 #if UNITY_EDITOR || UNITY_ANDROID
-	private readonly List<string> targetPackages = new List<string>( 0 );
-	private readonly List<string> targetClasses = new List<string>( 0 );
+    private readonly List<string> targetPackages = new List<string>(0);
+    private readonly List<string> targetClasses = new List<string>(0);
 #endif
 
-	private readonly List<string> files = new List<string>( 0 );
-	private readonly List<string> mimes = new List<string>( 0 );
+    private readonly List<string> files = new List<string>(0);
+    private readonly List<string> mimes = new List<string>(0);
 
-	private ShareResultCallback callback;
+    private ShareResultCallback callback;
 
-	public NativeShare SetSubject( string subject )
-	{
-		this.subject = subject ?? string.Empty;
-		return this;
-	}
+    public NativeShare SetSubject(string subject)
+    {
+        this.subject = subject ?? string.Empty;
+        return this;
+    }
 
-	public NativeShare SetText( string text )
-	{
-		this.text = text ?? string.Empty;
-		return this;
-	}
+    public NativeShare SetText(string text)
+    {
+        this.text = text ?? string.Empty;
+        return this;
+    }
 
-	public NativeShare SetTitle( string title )
-	{
-		this.title = title ?? string.Empty;
-		return this;
-	}
+    public NativeShare SetTitle(string title)
+    {
+        this.title = title ?? string.Empty;
+        return this;
+    }
 
-	public NativeShare SetCallback( ShareResultCallback callback )
-	{
-		this.callback = callback;
-		return this;
-	}
+    public NativeShare SetCallback(ShareResultCallback callback)
+    {
+        this.callback = callback;
+        return this;
+    }
 
-	[System.Obsolete( "Use AddTarget instead.", false )]
-	public NativeShare SetTarget( string androidPackageName, string androidClassName = null )
-	{
+    [System.Obsolete("Use AddTarget instead.", false)]
+    public NativeShare SetTarget(string androidPackageName, string androidClassName = null)
+    {
 #if UNITY_EDITOR || UNITY_ANDROID
-		targetPackages.Clear();
-		targetClasses.Clear();
+        targetPackages.Clear();
+        targetClasses.Clear();
 
-		AddTarget( androidPackageName, androidClassName );
+        AddTarget(androidPackageName, androidClassName);
 #endif
 
-		return this;
-	}
+        return this;
+    }
 
-	public NativeShare AddTarget( string androidPackageName, string androidClassName = null )
-	{
+    public NativeShare AddTarget(string androidPackageName, string androidClassName = null)
+    {
 #if UNITY_EDITOR || UNITY_ANDROID
-		if( !string.IsNullOrEmpty( androidPackageName ) )
-		{
-			if( androidClassName == null )
-				androidClassName = string.Empty;
+        if (!string.IsNullOrEmpty(androidPackageName))
+        {
+            if (androidClassName == null)
+                androidClassName = string.Empty;
 
-			bool isUnique = true;
-			for( int i = 0; i < targetPackages.Count; i++ )
-			{
-				if( targetPackages[i] == androidPackageName && targetClasses[i] == androidClassName )
-				{
-					isUnique = false;
-					break;
-				}
-			}
+            bool isUnique = true;
+            for (int i = 0; i < targetPackages.Count; i++)
+            {
+                if (targetPackages[i] == androidPackageName && targetClasses[i] == androidClassName)
+                {
+                    isUnique = false;
+                    break;
+                }
+            }
 
-			if( isUnique )
-			{
-				targetPackages.Add( androidPackageName );
-				targetClasses.Add( androidClassName );
-			}
-		}
+            if (isUnique)
+            {
+                targetPackages.Add(androidPackageName);
+                targetClasses.Add(androidClassName);
+            }
+        }
 #endif
 
-		return this;
-	}
+        return this;
+    }
 
-	public NativeShare AddFile( string filePath, string mime = null )
-	{
-		if( !string.IsNullOrEmpty( filePath ) && File.Exists( filePath ) )
-		{
-			files.Add( filePath );
-			mimes.Add( mime ?? string.Empty );
-		}
-		else
-			Debug.LogError( "Share Error: file does not exist at path or permission denied: " + filePath );
+    public NativeShare AddFile(string filePath, string mime = null)
+    {
+        if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+        {
+            files.Add(filePath);
+            mimes.Add(mime ?? string.Empty);
+        }
+        else
+            Debug.LogError("Share Error: file does not exist at path or permission denied: " + filePath);
 
-		return this;
-	}
+        return this;
+    }
 
-	public NativeShare AddFile( Texture2D texture, string createdFileName = "Image.png" )
-	{
-		if( !texture )
-			Debug.LogError( "Share Error: Texture does not exist!" );
-		else
-		{
-			if( string.IsNullOrEmpty( createdFileName ) )
-				createdFileName = "Image.png";
+    public NativeShare AddFile(Texture2D texture, string createdFileName = "Image.png")
+    {
+        if (!texture)
+            Debug.LogError("Share Error: Texture does not exist!");
+        else
+        {
+            if (string.IsNullOrEmpty(createdFileName))
+                createdFileName = "Image.png";
 
-			bool saveAsJpeg;
-			if( createdFileName.EndsWith( ".jpeg", System.StringComparison.OrdinalIgnoreCase ) || createdFileName.EndsWith( ".jpg", System.StringComparison.OrdinalIgnoreCase ) )
-				saveAsJpeg = true;
-			else
-			{
-				if( !createdFileName.EndsWith( ".png", System.StringComparison.OrdinalIgnoreCase ) )
-					createdFileName += ".png";
+            bool saveAsJpeg;
+            if (createdFileName.EndsWith(".jpeg", System.StringComparison.OrdinalIgnoreCase) || createdFileName.EndsWith(".jpg", System.StringComparison.OrdinalIgnoreCase))
+                saveAsJpeg = true;
+            else
+            {
+                if (!createdFileName.EndsWith(".png", System.StringComparison.OrdinalIgnoreCase))
+                    createdFileName += ".png";
 
-				saveAsJpeg = false;
-			}
+                saveAsJpeg = false;
+            }
 
-			string filePath = Path.Combine( Application.temporaryCachePath, createdFileName );
-			File.WriteAllBytes( filePath, GetTextureBytes( texture, saveAsJpeg ) );
+            string filePath = Path.Combine(Application.temporaryCachePath, createdFileName);
+            File.WriteAllBytes(filePath, GetTextureBytes(texture, saveAsJpeg));
 
-			AddFile( filePath, saveAsJpeg ? "image/jpeg" : "image/png" );
-		}
+            AddFile(filePath, saveAsJpeg ? "image/jpeg" : "image/png");
+        }
 
-		return this;
-	}
+        return this;
+    }
 
-	public void Share()
-	{
-		if( files.Count == 0 && subject.Length == 0 && text.Length == 0 )
-		{
-			Debug.LogWarning( "Share Error: attempting to share nothing!" );
-			return;
-		}
+    public void Share()
+    {
+        if (files.Count == 0 && subject.Length == 0 && text.Length == 0)
+        {
+            Debug.LogWarning("Share Error: attempting to share nothing!");
+            return;
+        }
 
 #if UNITY_EDITOR
-		Debug.Log( "Shared!" );
+        Debug.Log("Shared!");
 
-		if( callback != null )
-			callback( ShareResult.Shared, null );
+        if (callback != null)
+            callback(ShareResult.Shared, null);
 #elif UNITY_ANDROID
 		AJC.CallStatic( "Share", Context, new NSShareResultCallbackAndroid( callback ), targetPackages.ToArray(), targetClasses.ToArray(), files.ToArray(), mimes.ToArray(), subject, text, title );
 #elif UNITY_IOS
@@ -189,11 +191,12 @@ public class NativeShare
 #else
 		Debug.LogWarning( "NativeShare is not supported on this platform!" );
 #endif
-	}
+    }
 
-	#region Utility Functions
-	public static bool TargetExists( string androidPackageName, string androidClassName = null )
-	{
+    #region Utility Functions
+
+    public static bool TargetExists(string androidPackageName, string androidClassName = null)
+    {
 #if !UNITY_EDITOR && UNITY_ANDROID
 		if( string.IsNullOrEmpty( androidPackageName ) )
 			return false;
@@ -203,14 +206,14 @@ public class NativeShare
 
 		return AJC.CallStatic<bool>( "TargetExists", Context, androidPackageName, androidClassName );
 #else
-		return true;
+        return true;
 #endif
-	}
+    }
 
-	public static bool FindTarget( out string androidPackageName, out string androidClassName, string packageNameRegex, string classNameRegex = null )
-	{
-		androidPackageName = null;
-		androidClassName = null;
+    public static bool FindTarget(out string androidPackageName, out string androidClassName, string packageNameRegex, string classNameRegex = null)
+    {
+        androidPackageName = null;
+        androidClassName = null;
 
 #if !UNITY_EDITOR && UNITY_ANDROID
 		if( string.IsNullOrEmpty( packageNameRegex ) )
@@ -232,77 +235,81 @@ public class NativeShare
 
 		return true;
 #else
-		return false;
+        return false;
 #endif
-	}
-	#endregion
+    }
 
-	#region Internal Functions
-	private static byte[] GetTextureBytes( Texture2D texture, bool isJpeg )
-	{
-		try
-		{
-			return isJpeg ? texture.EncodeToJPG( 100 ) : texture.EncodeToPNG();
-		}
-		catch( UnityException )
-		{
-			return GetTextureBytesFromCopy( texture, isJpeg );
-		}
-		catch( System.ArgumentException )
-		{
-			return GetTextureBytesFromCopy( texture, isJpeg );
-		}
+    #endregion Utility Functions
+
+    #region Internal Functions
+
+    private static byte[] GetTextureBytes(Texture2D texture, bool isJpeg)
+    {
+        try
+        {
+            return isJpeg ? texture.EncodeToJPG(100) : texture.EncodeToPNG();
+        }
+        catch (UnityException)
+        {
+            return GetTextureBytesFromCopy(texture, isJpeg);
+        }
+        catch (System.ArgumentException)
+        {
+            return GetTextureBytesFromCopy(texture, isJpeg);
+        }
 
 #pragma warning disable 0162
-		return null;
+        return null;
 #pragma warning restore 0162
-	}
+    }
 
-	private static byte[] GetTextureBytesFromCopy( Texture2D texture, bool isJpeg )
-	{
-		// Texture is marked as non-readable, create a readable copy and share it instead
-		Debug.LogWarning( "Sharing non-readable textures is slower than sharing readable textures" );
+    private static byte[] GetTextureBytesFromCopy(Texture2D texture, bool isJpeg)
+    {
+        // Texture is marked as non-readable, create a readable copy and share it instead
+        Debug.LogWarning("Sharing non-readable textures is slower than sharing readable textures");
 
-		Texture2D sourceTexReadable = null;
-		RenderTexture rt = RenderTexture.GetTemporary( texture.width, texture.height );
-		RenderTexture activeRT = RenderTexture.active;
+        Texture2D sourceTexReadable = null;
+        RenderTexture rt = RenderTexture.GetTemporary(texture.width, texture.height);
+        RenderTexture activeRT = RenderTexture.active;
 
-		try
-		{
-			Graphics.Blit( texture, rt );
-			RenderTexture.active = rt;
+        try
+        {
+            Graphics.Blit(texture, rt);
+            RenderTexture.active = rt;
 
-			sourceTexReadable = new Texture2D( texture.width, texture.height, isJpeg ? TextureFormat.RGB24 : TextureFormat.RGBA32, false );
-			sourceTexReadable.ReadPixels( new Rect( 0, 0, texture.width, texture.height ), 0, 0, false );
-			sourceTexReadable.Apply( false, false );
-		}
-		catch( System.Exception e )
-		{
-			Debug.LogException( e );
+            sourceTexReadable = new Texture2D(texture.width, texture.height, isJpeg ? TextureFormat.RGB24 : TextureFormat.RGBA32, false);
+            sourceTexReadable.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0, false);
+            sourceTexReadable.Apply(false, false);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogException(e);
 
-			Object.DestroyImmediate( sourceTexReadable );
-			return null;
-		}
-		finally
-		{
-			RenderTexture.active = activeRT;
-			RenderTexture.ReleaseTemporary( rt );
-		}
+            Object.DestroyImmediate(sourceTexReadable);
+            return null;
+        }
+        finally
+        {
+            RenderTexture.active = activeRT;
+            RenderTexture.ReleaseTemporary(rt);
+        }
 
-		try
-		{
-			return isJpeg ? sourceTexReadable.EncodeToJPG( 100 ) : sourceTexReadable.EncodeToPNG();
-		}
-		catch( System.Exception e )
-		{
-			Debug.LogException( e );
-			return null;
-		}
-		finally
-		{
-			Object.DestroyImmediate( sourceTexReadable );
-		}
-	}
-	#endregion
+        try
+        {
+            return isJpeg ? sourceTexReadable.EncodeToJPG(100) : sourceTexReadable.EncodeToPNG();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogException(e);
+            return null;
+        }
+        finally
+        {
+            Object.DestroyImmediate(sourceTexReadable);
+        }
+    }
+
+    #endregion Internal Functions
 }
+
 #pragma warning restore 0414

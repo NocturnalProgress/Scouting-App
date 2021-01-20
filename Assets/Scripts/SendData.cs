@@ -1,19 +1,17 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class SendData : MonoBehaviour
 {
     [SerializeField]
-    private string BASE_URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfsLIBRdjNIsryTAnQFi8R8Ksufdpmwvjqi0BmXE4JtTCLNlw/formResponse";
+    private string BASE_URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfsLIBRdjNIsryTAnQFi8R8Ksufdpmwvjqi0BmXE4JtTCLNlw/formResponse"; // URL for the google form
 
     public NotificationSystem notificationSystem;
 
     public Data data;
 
-
-    public bool ConnectedToInternet()
+    public bool ConnectedToInternet() // This checks if the app is able to connect to google forms
     {
         UnityWebRequest request = new UnityWebRequest("https://www.google.com/forms/about/");
         if (request.error != null)
@@ -26,9 +24,9 @@ public class SendData : MonoBehaviour
         }
     }
 
-    IEnumerator Post(string name, string teamName, string matchNumber, string autonomousUpperCount, string autonomousInnerCount, string autonomousLowerCount, string teleOpUpperCount, string teleOpInnerCount, string teleOpLowerCount, string drivingEffectiveness, string defenseEffectiveness, string climbingEffectiveness, string additionalNotes)
+    private IEnumerator Post(string name, string teamName, string matchNumber, string autonomousUpperCount, string autonomousInnerCount, string autonomousLowerCount, string teleOpUpperCount, string teleOpInnerCount, string teleOpLowerCount, string drivingEffectiveness, string defenseEffectiveness, string climbingEffectiveness, string additionalNotes)
     {
-        WWWForm form = new WWWForm();
+        WWWForm form = new WWWForm(); // This fills out the form input fields
         form.AddField("entry.1015024617", name);
         form.AddField("entry.1415283686", teamName);
         form.AddField("entry.481944419", matchNumber);
@@ -46,7 +44,7 @@ public class SendData : MonoBehaviour
         UnityWebRequest www = UnityWebRequest.Post(BASE_URL, form);
         yield return www.SendWebRequest();
 
-        if (www.isNetworkError)
+        if (www.isNetworkError) // Displays error via notification system
         {
             notificationSystem.ErrorUploadingForm();
         }
@@ -56,7 +54,7 @@ public class SendData : MonoBehaviour
         }
     }
 
-    public void SendDataToForms()
+    public void SendDataToForms() // Collects data and prepares to send it to google forms
     {
         if (ConnectedToInternet() == true)
         {

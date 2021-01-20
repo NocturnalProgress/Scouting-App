@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using TMPro;
-
 
 public class AutonomousCounters : MonoBehaviour
 {
@@ -14,13 +11,11 @@ public class AutonomousCounters : MonoBehaviour
     public int innerCount;
     public int lowerCount;
 
-
     public TMP_Text upperCounter;
 
     public TMP_Text innerCounter;
 
     public TMP_Text lowerCounter;
-
 
     public Button subtractUpperCounter;
 
@@ -34,7 +29,7 @@ public class AutonomousCounters : MonoBehaviour
 
     public Button addLowerCounter;
 
-    void Start()
+    private void Start()
     {
         upperCount = Convert.ToInt32(upperCounter.text);
         innerCount = Convert.ToInt32(innerCounter.text);
@@ -94,5 +89,4 @@ public class AutonomousCounters : MonoBehaviour
     {
         lowerCounter.text = lowerCount.ToString();
     }
-
 }

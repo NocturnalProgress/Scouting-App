@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+
+/*
+    This script keeps track of all panels and ensures that they are resized correctly.
+*/
 
 public class UIManager : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class UIManager : MonoBehaviour
     private RectTransform parentRectTransform;
 
     // Start is called before the first frame update
-    void Start() // Resizes panels under PanelHolder based on screen size
+    private void Start() // Resizes panels under PanelHolder based on screen size
     {
         parentRectTransform = parentCanvas.gameObject.GetComponent<RectTransform>();
 

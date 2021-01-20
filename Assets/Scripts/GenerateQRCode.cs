@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
 using ZXing;
 using ZXing.Common;
 
@@ -23,7 +21,7 @@ public class GenerateQRCode : MonoBehaviour
     public GameObject data;
     public NotificationSystem notificationSystem;
 
-    void Start()
+    private void Start()
     {
         GameObject.Find("Data").GetComponent<Data>();
         cRawImage = GetComponent<RawImage>();
@@ -67,5 +65,4 @@ public class GenerateQRCode : MonoBehaviour
         tex.Apply();
         return tex;
     }
-
 }

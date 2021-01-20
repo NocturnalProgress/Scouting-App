@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+
+/*
+    This script was used for a previous version of the scouting app.
+    It disabled and enabled specific menus based on the button the user selects.
+*/
 
 public class ButtonGroupScript : MonoBehaviour
 {
@@ -17,8 +19,7 @@ public class ButtonGroupScript : MonoBehaviour
     private bool reset = false;
     private float timeOfFirstButton = 0f;
 
-
-    void Start()
+    private void Start()
     {
         mainCanvas.enabled = true;
         initialDataCanvas.enabled = false;

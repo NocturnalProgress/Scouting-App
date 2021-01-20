@@ -1,23 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using System.IO;
-using TMPro;
+﻿using UnityEngine;
+
+/*
+    This script exports the Scouting Data to a Json file.
+    First it gives each file a random number at the end in order to prevent duplicate files then it saves the file to Application.persistentDataPath.
+*/
 
 public class SerializeData : MonoBehaviour
 {
-    //Exports data to Json
-
     private string jsonPath;
+
     public GameObject data;
+
     public NotificationSystem notificationSystem;
-
-    void Start()
-    {
-        // string timeDate = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
-
-    }
 
     public void SaveToJson()
     {
@@ -27,6 +21,7 @@ public class SerializeData : MonoBehaviour
 
         string json = data.GetComponent<Data>().SerializeToJson();
         System.IO.File.WriteAllText(jsonPath, json);
+
         notificationSystem.FinishedExportingData();
     }
 }

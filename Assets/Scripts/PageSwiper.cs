@@ -1,23 +1,30 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/*
+    This script allows the user to swipe between different menus.
+    The scroll speed and other variables can be controlled here.
+*/
+
 public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     private Vector3 panelLocation;
+
     private float percentThreshold = 0.2f;
     private float easing = 0.1f;
+
     private int totalPages = 7;
     private int currentPage = 1;
-    private HorizontalLayoutGroup horizontalLayoutGroup;
-    private RectTransform canvasHolderRectTransform;
 
+    private HorizontalLayoutGroup horizontalLayoutGroup;
+
+    private RectTransform canvasHolderRectTransform;
     private RectTransform maimMenuRectTransform;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         panelLocation = transform.position;
 
@@ -36,7 +43,6 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             // horizontalLayoutGroup.padding.right = -1717;
         }
-
     }
 
     public void OnDrag(PointerEventData data)
@@ -70,7 +76,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
         }
     }
 
-    IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds)
+    private IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds)
     {
         float t = 0f;
         while (t <= 1.0)

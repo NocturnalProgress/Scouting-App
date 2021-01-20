@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class UIManagement : MonoBehaviour
 {
@@ -13,8 +10,7 @@ public class UIManagement : MonoBehaviour
     public Canvas autonomousScoutingCanvas;
     public Canvas teleOpScoutingCanvas;
 
-
-    void Start()
+    private void Start()
     {
         powerPortCanvas.rootCanvas.enabled = false;
         initiationLineCanvas.rootCanvas.enabled = false;
@@ -48,7 +44,6 @@ public class UIManagement : MonoBehaviour
         shieldGeneratorCanvas.rootCanvas.enabled = true;
         mainMenuCanvas.rootCanvas.enabled = false;
     }
-
 
     public void DisplayAutonomousPowerPortScouting()
     {
