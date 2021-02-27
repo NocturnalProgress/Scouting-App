@@ -24,12 +24,13 @@ public class SendData : MonoBehaviour
         }
     }
 
-    private IEnumerator Post(string name, string teamName, string matchNumber, string autonomousUpperCount, string autonomousInnerCount, string autonomousLowerCount, string teleOpUpperCount, string teleOpInnerCount, string teleOpLowerCount, string drivingEffectiveness, string defenseEffectiveness, string climbingEffectiveness, string additionalNotes)
+    private IEnumerator Post(string name, string teamName, string matchNumber, string initiationLine, string autonomousUpperCount, string autonomousInnerCount, string autonomousLowerCount, string teleOpUpperCount, string teleOpInnerCount, string teleOpLowerCount, string drivingEffectiveness, string defenseEffectiveness, string climbingEffectiveness, string additionalNotes)
     {
         WWWForm form = new WWWForm(); // This fills out the form input fields
         form.AddField("entry.1015024617", name);
         form.AddField("entry.1415283686", teamName);
-        form.AddField("entry.481944419", matchNumber);
+        form.AddField("entry.216055452", matchNumber);
+        form.AddField("entry.481944419", initiationLine);
         form.AddField("entry.1193038724", autonomousUpperCount);
         form.AddField("entry.1974190789", autonomousInnerCount);
         form.AddField("entry.1665466814", autonomousLowerCount);
@@ -58,7 +59,7 @@ public class SendData : MonoBehaviour
     {
         if (ConnectedToInternet() == true)
         {
-            StartCoroutine(Post(data.dataToExport.name, data.dataToExport.teamName, data.dataToExport.matchNumber, data.dataToExport.autonomousUpperCount, data.dataToExport.autonomousInnerCount, data.dataToExport.autonomousLowerCount, data.dataToExport.teleOpUpperCount, data.dataToExport.teleOpInnerCount, data.dataToExport.teleOpLowerCount, data.dataToExport.drivingEffectiveness, data.dataToExport.defenseEffectiveness, data.dataToExport.climbingEffectiveness, data.dataToExport.additionalNotes));
+            StartCoroutine(Post(data.dataToExport.name, data.dataToExport.teamName, data.dataToExport.initiationLine, data.dataToExport.matchNumber, data.dataToExport.autonomousUpperCount, data.dataToExport.autonomousInnerCount, data.dataToExport.autonomousLowerCount, data.dataToExport.teleOpUpperCount, data.dataToExport.teleOpInnerCount, data.dataToExport.teleOpLowerCount, data.dataToExport.drivingEffectiveness, data.dataToExport.defenseEffectiveness, data.dataToExport.climbingEffectiveness, data.dataToExport.additionalNotes));
         }
         else
         {

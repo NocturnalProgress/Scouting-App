@@ -13,9 +13,10 @@ public class Data : MonoBehaviour
     public TMP_InputField teamNameInputField;
     public TMP_InputField matchNumberInputField;
     public TMP_InputField additionalNotesInputField;
+    public TMP_Dropdown initiationLineDropDown;
     public TMP_Dropdown drivingEffectivenessDropDown;
     public TMP_Dropdown defenseEffectivenessDropDown;
-    public TMP_Dropdown climbingEffectivenssDropDrown;
+    public TMP_Dropdown climbingEffectivenssDropDown;
     [HideInInspector] public string data;
     public NotificationSystem notificationSystem;
 
@@ -29,6 +30,7 @@ public class Data : MonoBehaviour
         dataToExport.name = nameInputField.text;
         dataToExport.teamName = teamNameInputField.text;
         dataToExport.matchNumber = matchNumberInputField.text;
+        dataToExport.initiationLine = initiationLineDropDown.options[initiationLineDropDown.value].text.ToString();
 
         dataToExport.autonomousUpperCount = autonomousCounters.upperCount.ToString();
         dataToExport.autonomousInnerCount = autonomousCounters.innerCount.ToString();
@@ -40,7 +42,7 @@ public class Data : MonoBehaviour
 
         dataToExport.drivingEffectiveness = drivingEffectivenessDropDown.value.ToString();
         dataToExport.defenseEffectiveness = defenseEffectivenessDropDown.value.ToString();
-        dataToExport.climbingEffectiveness = climbingEffectivenssDropDrown.options[climbingEffectivenssDropDrown.value].text;
+        dataToExport.climbingEffectiveness = climbingEffectivenssDropDown.options[climbingEffectivenssDropDown.value].text;
         dataToExport.additionalNotes = additionalNotesInputField.text;
 
         scoutingDataContainer.Add(dataToExport);
@@ -65,6 +67,7 @@ public class Data : MonoBehaviour
         // Initial Data
         // nameInputField.text = "";
         teamNameInputField.text = "";
+        initiationLineDropDown.value = 0;
 
         // Autonomous
         autonomousCounters.upperCount = 0;
@@ -87,7 +90,7 @@ public class Data : MonoBehaviour
         // End Game
         drivingEffectivenessDropDown.value = 0;
         defenseEffectivenessDropDown.value = 0;
-        climbingEffectivenssDropDrown.value = 0;
+        climbingEffectivenssDropDown.value = 0;
         additionalNotesInputField.text = "";
     }
 }
@@ -98,6 +101,7 @@ public class DataToExport
     public string name;
     public string matchNumber;
     public string teamName;
+    public string initiationLine;
     public string autonomousUpperCount;
     public string autonomousInnerCount;
     public string autonomousLowerCount;

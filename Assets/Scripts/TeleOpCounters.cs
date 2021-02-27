@@ -43,39 +43,39 @@ public class TeleOpCounters : MonoBehaviour
     //Inner
     public void SubtractFromUpperCounter()
     {
-        upperCount = upperCount - 1;
+        upperCount -= 1;
         UpdateUpperCount();
     }
 
     public void AddToUpperCounter()
     {
-        upperCount = upperCount + 1;
+        upperCount += 1;
         UpdateUpperCount();
     }
 
     //InnerInner
     public void SubtractFromInnerCount()
     {
-        innerCount = innerCount - 1;
+        innerCount -= 1;
         UpdateInnerCount();
     }
 
     public void AddToInnerCounter()
     {
-        innerCount = innerCount + 1;
+        innerCount += 1;
         UpdateInnerCount();
     }
 
     //Outer
     public void SubtractFromLowerCounter()
     {
-        lowerCount = lowerCount - 1;
+        lowerCount -= 1;
         UpdateLowerCount();
     }
 
     public void AddToLowerCounter()
     {
-        lowerCount = lowerCount + 1;
+        lowerCount += 1;
         UpdateLowerCount();
     }
 

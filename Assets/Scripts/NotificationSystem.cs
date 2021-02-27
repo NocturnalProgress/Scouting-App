@@ -17,6 +17,7 @@ public class NotificationSystem : MonoBehaviour
     private void Start()
     {
         index = 0;
+        message = "";
     }
 
     public void DisplayNotificationCanvas(string message)
